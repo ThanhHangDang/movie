@@ -1,0 +1,77 @@
+** Cài đặt react **
+- Cài đặt: npm install create-react-app -g
+- Tạo project react mới: create-react-app [tên project]
+
+====================================================================
+
+** Cài đặt Jquery Popper.js bootstrap@4.5.2 reudx react-redux **
+- npm install jquery popper.js bootstrap@4.5.2 redux react-redux --save
+
+====================================================================
+
+** Cấu hình **
+- bootstrap, jquery, popper:
+    + Vào src/index.js rồi import vào:
+        import "jquery/dist/jquery.min.js";
+        import "bootstrap/dist/css/bootstrap.min.css";
+        import "popper.js/dist/umd/popper.min.js";
+        import "bootstrap/dist/js/bootstrap.min.js";
+
+=====================================================================
+
+** Cấu hình redux **
+- Vào src/index.js: 
+    import { createStore } from "redux";
+    import { Provider } from "react-redux"; //để connect redux vào react
+
+    //Tạo ra biến store
+        const store = createStore();
+
+    //<Provider></Provider> vào <App />
+    //cung cấp props vào Provider là biến store vừa tạo
+        <Provider store={store}>
+            <App />
+        </Provider>
+    
+- Trong src tạo ra 1 thư mục là redux, 
+    trong thư mục redux tạo ra thư mục là reducer,
+    trong reducer tạo ra index.js
+    trong index.js:
+        import { combineReducers } from "redux";
+
+        //tạo ra 1 cái hàm rootReducer
+            const rootReducer = combineReducers({
+
+            });
+            export default rootReducer;
+
+- Quay lại src/index.js:
+    import rootReducer from "./redux/reducer";
+
+    // truyền rootReducer vào biến store
+        const store = createStore(rootReducer);
+
+- Sử dụng thêm redux dev tool
+    dán window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() vào store
+        const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+
+====================================================================
+
+** Tạo ra repo trên github để up lên theo cách 2**
+- New ra 1 cái repository:
+    + pulic hoặc private
+    + ko cần thêm file
+
+- sử dụng các câu lệnh
+    + echo "# movie" >> README.md (add file README nếu cần)
+    + git init (tạo ra cấu hình project)
+    --------------------------------------------
+    chỉ cần checl lại trạng thái:
+    + git status
+    + git add .
+    + git commit -m""
+    + git remote add origin https://github.com/ThanhHangDang/movie.git
+    + git push -u origin master
+
+======================================================================
