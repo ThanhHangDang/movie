@@ -75,3 +75,59 @@
     + git push -u origin master
 
 ======================================================================
+
+** Tạo Routing
+- Cài đặt thư viện react-router-dom
+    npm react-router-dom --save
+
+- Ví dụ làm có 3 trang (HomePage, AboutPage, ListMoviePage)
+    + vào App.js :
+        import { BrowserRouter, Route, Switch } from "react-router-dom";
+        + Bao tất cả bằng BrowserRouter
+            function App(){
+                return (
+                    <BrowserRouter>
+                        <Navbar />
+                        <Switch>
+                             //trang chủ - localhost:3000
+                            <Route 
+                                exact   =>giải quyết vấn đề vào chính xác trang HomePage
+                                path="/"
+                                component={HomePage}
+                            />
+
+                            //trang about - localhost:3000/about
+                            <Route 
+                                path="/about"
+                                component={AboutPage}
+                            />
+
+                            //trang listMovie - localhost:3000/list-movie
+                            <Route 
+                                path="/list-movie"
+                                component={ListMoviePage}
+                            />
+
+                            //trang ko tồn tại-luôn nằm ở cuối cùng
+                            <Route 
+                                path=""
+                                component={PageNotFound}
+                            />
+                        </Switch>
+                    </BrowserRouter>
+                );
+            }
+        - (import thêm Switch để giải quyết vấn đề trang PageNotFound bị load theo các trang khác)
+
+- tạo thêm 1 thanh Navbar cho giao diện (tạo 1 component Navbar)
+    gọi Navbar trên Switch
+    chỉnh lại đường link href cho đúng với đường link setting
+
+    đang bị Load lại trang, phá vỡ cấu trúc single page, lý do là thẻ <a></a> load lại
+    => dùng Link từ thư viện "react-router-dom" thay thế cho tất cả thẻ <a></a>, đổi lại href thành to
+    => thay Link bằng Navlink để dùng kĩ thuật active
+        thêm activeClassName = "active"
+        thêm exact vào Navlink của HomePage
+
+======================================================================================
+
